@@ -1,0 +1,33 @@
+﻿@page "/review"
+@inject Sentiment.Inference.SentimentInference SentimentInference
+
+<p><textarea oninput=@UpdateScoreAsync cols="45" placeholder="Type any text like a short movie review"></textarea></p>
+
+<HappinessScale Value=@happiness />
+
+<br>
+<br>
+<br>
+<br>
+
+@functions {
+    float happiness = 50; // 0=worst, 100=best
+    string tweetText = string.Empty; //280 characters is maximum length for the tweet text
+
+    void UpdateScoreAsync(UIChangeEventArgs evt)
+    {
+        string targetText = (string)evt.Value;
+
+        //Make a real call to Sentiment service
+        happiness = PredictSentimentAsync(targetText.ToLower());
+
+        // See issue https://github.com/aspnet/Blazor/issues/519.  This is needed otherwise the binding to happiness isn't updated after the async call for prediction.
+        StateHasChanged();
+    }
+
+    private float PredictSentimentAsync(string targetText)
+    {
+        var result = (float)Math.Max(0.0, Math.Min(SentimentInference.Infer(targetText) * 100.0f, 100.0f));
+        return result;
+    }
+}

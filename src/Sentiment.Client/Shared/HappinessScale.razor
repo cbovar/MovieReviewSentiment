@@ -1,0 +1,28 @@
+﻿<div class="sentiment">
+    <h4>Your sentiment is...</h4>
+    <table class="table">
+        <tr>
+            <td>😡</td>
+            <td>🙁</td>
+            <td>😐</td>
+            <td>😃</td>
+            <td>😍</td>
+        </tr>
+    </table>
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="@Value"
+             aria-valuemin="0" aria-valuemax="100" style="width:@Value%">
+            <span class="sr-only">@Value.ToString("0.0")%</span>
+        </div>
+        <div>
+            <label>@Value.ToString("0.0")%</label>
+        </div>
+    </div>
+</div>
+
+
+
+@functions {
+    [Parameter] float Value { get; set; }
+}
