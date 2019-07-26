@@ -1,6 +1,6 @@
 # Movie Review Sentiment
 
-Movie Review Sentiment using Blazor / ConvnetSharp
+Movie Review Sentiment using [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/client) / [ConvNetSharp](https://github.com/cbovar/ConvNetSharp)
 
 ### Projects:
 * **Sentiment.Training**: Run to train the network. Model will be stored in *Model* folder (*sentiment.json*). Training data are located in *Data* folder (*reviews.txt* and *labels.txt*).
