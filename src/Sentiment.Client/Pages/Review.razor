@@ -1,7 +1,8 @@
 ﻿@page "/review"
+@using Microsoft.AspNetCore.Components
 @inject Sentiment.Inference.SentimentInference SentimentInference
 
-<p><textarea oninput=@UpdateScoreAsync cols="45" placeholder="Type any text like a short movie review"></textarea></p>
+<p><textarea @oninput="UpdateScoreAsync" cols="45" placeholder="Type any text like a short movie review"></textarea></p>
 
 <HappinessScale Value=@happiness />
 
