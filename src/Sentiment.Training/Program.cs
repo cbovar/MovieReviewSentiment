@@ -11,14 +11,14 @@ using ConvNetSharp.Volume.Double;
 
 namespace Sentiment.Training
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Load data
 
-            int min_count = 10;
-            double polarity_cutoff = 0.1;
+            var min_count = 10;
+            var polarity_cutoff = 0.1;
 
             var labels = File.ReadAllLines("../../../../Data/labels.txt");
             var reviews = File.ReadAllLines("../../../../Data/reviews.txt");
@@ -96,10 +96,10 @@ namespace Sentiment.Training
             var input = BuilderInstance.Volume.SameAs(new Shape(1, 1, review_vocab.Count));
             var output = BuilderInstance.Volume.SameAs(new Shape(1, 1, 1));
 
-            int i = 0;
-            int correct = 0;
+            var i = 0;
+            var correct = 0;
 
-            for (int epoch = 0; epoch < 3; epoch++)
+            for (var epoch = 0; epoch < 3; epoch++)
             {
                 Console.WriteLine($"Epoch #{epoch}");
 
@@ -121,12 +121,15 @@ namespace Sentiment.Training
 
                     if (i % 100 == 0)
                     {
-                        Console.WriteLine($"Accuracy: {Math.Round(correct / (double)i * 100.0, 2) }%");
+                        Console.WriteLine($"Accuracy: {Math.Round(correct / (double)i * 100.0, 2)}%");
                         Console.WriteLine($"{i}/{reviews.Length}");
                     }
 
                     i++;
-                    if (Console.KeyAvailable) break;
+                    if (Console.KeyAvailable)
+                    {
+                        break;
+                    }
                 }
             }
 

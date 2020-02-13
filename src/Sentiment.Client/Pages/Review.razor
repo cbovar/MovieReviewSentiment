@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Components
 @inject Sentiment.Inference.SentimentInference SentimentInference
 
-<p><textarea @oninput="UpdateScoreAsync" cols="45" placeholder="Type any text like a short movie review"></textarea></p>
+<p><textarea @oninput="Test" cols="45" placeholder="Type any text like a short movie review"></textarea></p>
 
 <HappinessScale Value=@happiness />
 
@@ -15,9 +15,9 @@
     float happiness = 50; // 0=worst, 100=best
     string tweetText = string.Empty; //280 characters is maximum length for the tweet text
 
-    void UpdateScoreAsync(UIChangeEventArgs evt)
+    private void Test(ChangeEventArgs args)
     {
-        string targetText = (string)evt.Value;
+        var targetText = (string)args.Value;
 
         //Make a real call to Sentiment service
         happiness = PredictSentimentAsync(targetText.ToLower());
